@@ -29,7 +29,7 @@ An upcoming Monday/Wednesday date (within 90 days), number of guests (1–20), o
 
 ## Handling a request
 
-Use Supabase Table Editor → `walk_requests` to review requests. Check availability, then manually contact the guest and hotel as agreed. Change `status` through `requested`, `availability_confirmed`, `hotel_contacted`, `confirmed`, or `cancelled`. Payment starts as `not_arranged`; update it manually through `hotel_arranging`, `arranged`, or `paid`. Only use `confirmed` when the booking and payment arrangement are agreed. No hotel or guest emails are sent automatically. Check new requests regularly; email alerts can be added later.
+Use Supabase Table Editor → `walk_requests` to review requests. Check availability, then manually contact the guest and hotel as agreed. Change `status` through `requested`, `availability_confirmed`, `hotel_contacted`, `confirmed`, or `cancelled`. Payment starts as `not_arranged`; update it manually through `hotel_arranging`, `arranged`, or `paid`. Only use `confirmed` when the booking and payment arrangement are agreed. No hotel or guest emails are sent automatically. Owner email alerts require the setup below; until delivery is tested, continue checking the dashboard.
 
 Filter/group `referral_code` to compare enquiries and confirmed bookings. No visitor analytics are implemented, so this reports submitted requests, not visit-to-submission conversion. Hotel codes can be distributed as URLs/QR codes without creating separate forms. Guest-entered hotel names remain separate from URL attribution.
 
@@ -42,3 +42,21 @@ Run `npm run lint`, `npm run build`, and `node --test tests/walk-requests.test.m
 The SQL migration was executed successfully. A transactional database test verified referral capture and the initial request/payment statuses, then rolled back its test row. Local mock tests also verify application handling.
 
 Live verification on 5 October 2026: the custom-domain form returned a saved request reference after submitting a clearly marked test request. Anonymous SELECT and function EXECUTE permissions are denied. One `TEST ONLY` request with referral `test-hotel` remains in the table for verification; disregard it when counting real enquiries.
+
+## Owner email alerts (activation pending)
+
+5 October setup progress: the notification migration is applied and its lease, stale-token rejection, completion and anonymous-read checks passed against Supabase in a rolled-back test. The minute Cron job is scheduled. Matching worker tokens are stored in Vercel Production and Supabase Vault. `RESEND_API_KEY` was added by the owner; `BOOKING_EMAIL_FROM` is configured. Sending-domain verification and a real inbox-delivery test are still pending. Do not treat alerts as working until those complete.
+
+Run `supabase/migrations/202610050002_walk_notifications.sql` once. Every newly inserted request is atomically queued; an unchanged guest retry cannot create another notification. Existing requests are not backfilled automatically—review them manually before activating alerts.
+
+Create a Resend account, verify the sending domain using the DNS records Resend supplies, and create a Sending-access API key. In Vercel project `stargaze-website-57wm`, Production, configure:
+
+- `RESEND_API_KEY`: private sending API key, Secret type.
+- `BOOKING_EMAIL_FROM`: `Stargaze Bookings <bookings@stargaze-solutions.com>` after verifying that domain. No mailbox at that address is required just to send; receiving replies is handled by the guest's Reply-To address.
+- `NOTIFICATION_WORKER_SECRET`: a private random token, also saved in Supabase Vault as `stargaze_notification_worker_secret`.
+
+Run `supabase/notification-cron.sql` once and deploy. The application attempts delivery immediately after saving; Supabase Cron checks due notifications every minute independently of visitor traffic. Do not use Vercel Hobby's daily cron for this requirement. The recipient is fixed in server code to `wilson@stargaze-solutions.com`. Messages contain the request reference, date, guest names/count, contact details, hotel/room, payment preference and referral. Guest data is sent through Resend to deliver the requested owner notification. No messages are sent to guests or hotels automatically.
+
+The queue stores a stable email body and uses the request UUID as Resend's idempotency key. Failures retry after 1, 2, 4, 8 minutes, up to hourly. Expired worker leases recover after two minutes. Automatic retries stop after 23 hours from the first attempt to stay inside Resend's 24-hour deduplication window: inspect `needs_review` rows manually. `accepted` means Resend accepted the email, not proof of inbox delivery. Inspect Resend for delivery/bounce status and verify the inbox/spam folder in a real end-to-end test before relying on alerts. Email cannot guarantee instant inbox delivery.
+
+Test a new explicitly marked request, verify the queue's provider ID and inbox arrival, and exercise the retry worker. Run `node --test tests/walk-requests.test.mjs tests/request-notifications.test.mjs`. Credentials, queue migration and Cron setup must all be live; passing local tests alone does not activate alerts.

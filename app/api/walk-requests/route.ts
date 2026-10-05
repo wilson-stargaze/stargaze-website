@@ -1,7 +1,9 @@
 import { createHmac } from "node:crypto";
 import { validateRequest } from "@/lib/walk-requests";
+import { sendPendingNotifications } from "@/lib/request-notifications";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 const json = (body: unknown, status: number) => Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
 export async function POST(request: Request) {
@@ -44,6 +46,10 @@ export async function POST(request: Request) {
     }
     const savedId = await response.json();
     if (savedId !== requestId) throw new Error("Unexpected save response");
+    // Saving and queuing are atomic in Supabase. An email failure must not make
+    // a guest resubmit a successfully saved request; the minute worker retries.
+    try { await sendPendingNotifications(requestId); }
+    catch { console.error("walk_notification_immediate_attempt_failed"); }
     return json({ reference: requestId }, 201);
   } catch {
     return json({ error: "We couldn’t confirm that your request was saved. Retry with the same details, or contact Stargaze by email." }, 503);
