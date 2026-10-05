@@ -40,3 +40,5 @@ The guest cannot read the database. Row Level Security is enabled with no public
 Run `npm run lint`, `npm run build`, and `node --test tests/walk-requests.test.mjs`. Once configured, use an explicitly marked test request to verify save, retry behaviour, referral capture and hotel-payment preference. Check that anonymous database reads are denied. Remove test records only after identifying them as disposable test data.
 
 The SQL migration was executed successfully. A transactional database test verified referral capture and the initial request/payment statuses, then rolled back its test row. Local mock tests also verify application handling.
+
+Live verification on 5 October 2026: the custom-domain form returned a saved request reference after submitting a clearly marked test request. Anonymous SELECT and function EXECUTE permissions are denied. One `TEST ONLY` request with referral `test-hotel` remains in the table for verification; disregard it when counting real enquiries.
