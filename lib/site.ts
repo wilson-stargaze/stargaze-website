@@ -2,6 +2,7 @@
 export const site = {
   email: "wilson@stargaze-solutions.com",
   bookingUrl: "",
+  woodlandsBookingUrl: "https://www.seeksophie.com/experiences/explore-singapore-s-biodiversity-at-woodlands-botanical-gardens",
 };
 
 export function normalizeReferral(value: string | string[] | undefined) {
@@ -11,7 +12,7 @@ export function normalizeReferral(value: string | string[] | undefined) {
 
 export function walkEnquiryUrl(referral?: string) {
   const body = [
-    "Hello Stargaze, I would like to enquire about the Fort Canning Nature & History Walk.",
+    "Hello Stargaze, I would like to enquire about the Fort Canning Heritage & Butterfly Trail.",
     "", "Preferred date:", "Number of guests:", "Questions:",
     ...(referral ? ["", `Referral: ${referral}`] : []),
   ].join("\n");

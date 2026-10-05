@@ -33,6 +33,11 @@ nav a:hover, .text-link:hover, .footer a:hover { text-decoration: underline; tex
 .card .eyebrow { font-size: .7rem; }
 .featured { background: #e5ebda; border-color: transparent; }
 .featured:hover { background: #dce4ce; }
+.available:hover { background: #eaece2; border-color: #58754b; }
+.trail-title { font-size: clamp(2.9rem, 6.8vw, 5.8rem); }
+.photo { display: block; width: 100%; height: auto; border-radius: 5px; }
+.trail-photo { margin: 42px 0 0; }
+.trail-photo figcaption { font-size: .82rem; color: #526054; margin-top: 10px; }
 .card-link { margin-top: auto; padding-top: 24px; font-size: .88rem; font-weight: 600; }
 .band { background: #eaece2; }
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }

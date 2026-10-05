@@ -15,11 +15,11 @@ export default function Home() {
         <p className="eyebrow">Explore with us</p><h2>A fresh perspective on familiar places.</h2>
         <div className="cards">
           <Link href="/fort-canning" className="card featured">
-            <p className="eyebrow">Nature & history</p><h3>Fort Canning<br />Nature & History Walk</h3>
-            <p>A green hill, a layered past, and a world of small discoveries in the heart of the city.</p>
+            <p className="eyebrow">Heritage & biodiversity</p><h3>Fort Canning<br />Heritage & Butterfly Trail</h3>
+            <p>Trace the hill’s changing stories and discover the wildlife living in the heart of the city.</p>
             <span className="card-link">Discover the walk ↗</span>
           </Link>
-          <article className="card"><p className="eyebrow">Coming soon</p><h3>Woodlands<br />Botanical Garden</h3><p>Explore a community-created garden and the living stories of northern Singapore.</p></article>
+          <Link href="/woodlands" className="card available"><p className="eyebrow">Community & nature</p><h3>Woodlands<br />Botanical Garden</h3><p>Explore a community-created garden and the living stories of northern Singapore.</p><span className="card-link">Explore the garden walk ↗</span></Link>
           <article className="card"><p className="eyebrow">Coming soon</p><h3>Corporate<br />BioBlitz</h3><p>Bring your team together through nature discovery and citizen science.</p></article>
         </div>
       </section>

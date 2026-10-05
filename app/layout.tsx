@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <nav aria-label="Main navigation"><Link href="/#experiences">Experiences</Link><Link href="/#about">About</Link><Link href="/#contact">Contact</Link></nav>
       </header>
       {children}
-      <footer className="wrap footer"><Link href="/" className="brand">Stargaze Solutions</Link><p>See Singapore differently.</p><Link href="/fort-canning">Fort Canning walk</Link></footer>
+      <footer className="wrap footer"><Link href="/" className="brand">Stargaze Solutions</Link><p>See Singapore differently.</p><Link href="/fort-canning">Fort Canning trail</Link><Link href="/woodlands">Woodlands garden walk</Link></footer>
     </body></html>
   );
 }
