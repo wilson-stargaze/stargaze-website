@@ -1,4 +1,4 @@
-// Add a full HTTPS booking-form URL when reservations are ready to open.
+// External booking URL can optionally replace the local request form later.
 export const site = {
   email: "wilson@stargaze-solutions.com",
   bookingUrl: "",
@@ -20,7 +20,7 @@ export function walkEnquiryUrl(referral?: string) {
 }
 
 export function walkBookingUrl(referral?: string) {
-  if (!site.bookingUrl) return undefined;
+  if (!site.bookingUrl) return `/fort-canning/signup${referral ? `?ref=${encodeURIComponent(referral)}` : ""}`;
   const url = new URL(site.bookingUrl);
   if (url.protocol !== "https:") throw new Error("Booking URL must use HTTPS");
   if (referral) url.searchParams.set("ref", referral);

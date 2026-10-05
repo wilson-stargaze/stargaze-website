@@ -83,3 +83,27 @@ details p { margin: 18px 0 0; }
   .details > div { grid-template-columns: 100px 1fr; gap: 14px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+.signup-page { max-width: 800px; padding-block: 36px 76px; }
+.form-title { font-size: clamp(3rem, 7vw, 5.5rem); }
+.request-form { margin-top: 40px; }
+.request-form fieldset { border: 0; padding: 0; margin: 0 0 36px; min-width: 0; }
+.request-form legend { font-family: Georgia, serif; font-size: 1.7rem; margin-bottom: 16px; }
+.request-form label { display: block; font-weight: 600; margin: 18px 0 8px; }
+.request-form input:not([type=checkbox]), .request-form select, .request-form textarea { width: 100%; max-width: 100%; border: 1px solid #7a887a; border-radius: 4px; padding: 12px; background: #fffdf7; color: #233d32; font: inherit; min-height: 48px; }
+.request-form textarea { resize: vertical; }
+.request-form input:focus-visible, .request-form select:focus-visible, .request-form textarea:focus-visible, .request-form button:focus-visible { outline: 3px solid #b57528; outline-offset: 3px; }
+.request-form [aria-invalid=true] { border-color: #9e342b !important; }
+.field-hint { font-size: .86rem; color: #526054; margin: 8px 0 18px; }
+.field-error { display: block; color: #9e342b; margin: 8px 0; font-size: .9rem; }
+.form-notice, .form-errors, .request-success { padding: 24px; border-radius: 5px; background: #e5ebda; margin-block: 24px; }
+.form-notice p { margin: 8px 0 0; }
+.form-errors { background: #fae8df; }
+.form-errors ul { padding-left: 20px; margin-bottom: 0; }
+.form-errors a, .request-form .text-link { text-decoration: underline; text-underline-offset: 3px; }
+.request-form .consent { display: flex; gap: 14px; align-items: start; font-weight: 400; }
+.consent input { width: 22px; height: 22px; flex-shrink: 0; margin-top: 3px; accent-color: #233d32; }
+.request-form button { border: 0; font: inherit; cursor: pointer; }
+.request-form button:disabled { opacity: .6; cursor: wait; }
+.form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.request-reference { overflow-wrap: anywhere; }
