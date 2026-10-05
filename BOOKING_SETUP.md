@@ -43,9 +43,9 @@ The SQL migration was executed successfully. A transactional database test verif
 
 Live verification on 5 October 2026: the custom-domain form returned a saved request reference after submitting a clearly marked test request. Anonymous SELECT and function EXECUTE permissions are denied. One `TEST ONLY` request with referral `test-hotel` remains in the table for verification; disregard it when counting real enquiries.
 
-## Owner email alerts (activation pending)
+## Owner email alerts (live)
 
-5 October setup progress: the notification migration is applied and its lease, stale-token rejection, completion and anonymous-read checks passed against Supabase in a rolled-back test. The minute Cron job is scheduled. Matching worker tokens are stored in Vercel Production and Supabase Vault. `RESEND_API_KEY` was added by the owner; `BOOKING_EMAIL_FROM` is configured. Sending-domain verification and a real inbox-delivery test are still pending. Do not treat alerts as working until those complete.
+Verified live on 5 October 2026: the sending domain is verified, and a new form submission (reference `318d5a25-ae6d-4a05-9da0-796027b73d95`) produced Resend email `01a10ca5-47a0-7843-ae31-77f5291fda24` to the owner. Wilson confirmed receiving both test emails in the inbox. The notification migration's lease, stale-token rejection, completion and anonymous-read checks passed in a rolled-back Supabase test. The minute Cron job is active and its three latest runs succeeded. Matching worker tokens are stored in Vercel Production and Supabase Vault; the sending key and sender address are configured. Clearly marked test requests remain and should be excluded from real enquiry counts.
 
 Run `supabase/migrations/202610050002_walk_notifications.sql` once. Every newly inserted request is atomically queued; an unchanged guest retry cannot create another notification. Existing requests are not backfilled automatically—review them manually before activating alerts.
 
