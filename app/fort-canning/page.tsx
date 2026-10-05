@@ -45,7 +45,7 @@ export default async function FortCanning({ searchParams }: PageProps<"/fort-can
           <div><dt>Duration</dt><dd>Approximately 1½–2 hours; allow 2 hours for your visit</dd></div>
           <div><dt>Start time</dt><dd>A morning start around 9.30am is ideal. Your time will be agreed when arranging the walk.</dd></div>
           <div><dt>Location</dt><dd>Fort Canning Park. The route is to be confirmed.</dd></div>
-          <div><dt>Meeting point</dt><dd>YMCA. Exact meeting instructions will be shared before the walk.</dd></div>
+          <div><dt>Meeting point</dt><dd>To be confirmed. Meeting instructions will be shared before the walk.</dd></div>
           <div><dt>Who it’s for</dt><dd>Adults, families and curious travellers; no nature knowledge required</dd></div>
           <div><dt>Group size</dt><dd>3–20 people</dd></div>
           <div><dt>Language</dt><dd>English</dd></div>

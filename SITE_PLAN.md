@@ -13,7 +13,7 @@ Edit copy in `app/page.tsx`, `app/fort-canning/page.tsx` and `app/woodlands/page
 
 Fort Canning content follows the supplied two-page “Fort Canning Heritage & Butterfly Trail” brochure, with wording adapted for the web. The group photograph and dragonfly photograph were extracted from that PDF into `public/images/fort-canning/`.
 
-The brochure specifies approximately 1½–2 hours (allow 2 hours), a morning start around 9.30am as ideal rather than a fixed schedule, YMCA as the meeting point, English, groups of 3–20 and S$45 per guest including a souvenir and refreshments. Groups under five have a minimum booking charge of S$200. The route remains to be confirmed. Walks can continue in light rain; in a thunderstorm they can be postponed or cancelled with a refund.
+The brochure specifies approximately 1½–2 hours (allow 2 hours), a morning start around 9.30am as ideal rather than a fixed schedule, English, groups of 3–20 and S$45 per guest including a souvenir and refreshments. Groups under five have a minimum booking charge of S$200. Following the owner's update, the meeting point and route remain to be confirmed while reconnaissance continues. Meeting instructions will be shared before the walk. Walks can continue in light rain; in a thunderstorm they can be postponed or cancelled with a refund.
 
 Until a booking form exists, private walks are arranged by email enquiry. An enquiry does not confirm a reservation. Join-in dates are still being planned.
 
